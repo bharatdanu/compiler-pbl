@@ -146,14 +146,10 @@ function tokenize(input, options = {}) {
 
     // Comments: //... or /* ... */
     if (ch === '/' && input[i + 1] === '/') {
-      const startLine = line;
-      const startCol = col;
-      let lexeme = '';
+      // ignore //... comment
       while (i < input.length && currentChar() !== '\n') {
-        lexeme += currentChar();
         advance(1);
       }
-      // ignore comment
       continue;
     }
 
@@ -175,7 +171,6 @@ function tokenize(input, options = {}) {
       }
       continue;
     }
-
 
     // String literals: "..." with simple escapes
     if (ch === '"' || ch === "'") {
